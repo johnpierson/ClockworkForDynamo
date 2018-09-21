@@ -11,11 +11,13 @@ paramlist = list()
 paramnamelist = list()
 for dimension in dimensions:
 	try:
-		famlabel = dimension.FamilyLabel
-		labelname = famlabel.Definition.Name
+		if dimension.FamilyLabel != None:
+			paramlist.append(dimension.FamilyLabel)
+			paramnamelist.append(dimension.FamilyLabel.Definition.Name)
+		else:	
+			paramlist.append(list())
+			paramnamelist.append(list())
 	except:
-		famlabel = list()
-		labelname = list()
-	paramlist.append(famlabel)
-	paramnamelist.append(labelname)
+		paramlist.append(list())
+		paramnamelist.append(list())
 OUT = (paramlist,paramnamelist)

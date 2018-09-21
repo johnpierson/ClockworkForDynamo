@@ -1,0 +1,264 @@
+{
+  "Uuid": "7ec4b275-ebb9-45de-a83e-8cb617076230",
+  "IsCustomNode": true,
+  "Category": "Clockwork.Revit.Selection.Collectors.Query",
+  "Description": "Retrieves all family types of a given category that have *placed* instances",
+  "Name": "All Placed Family Types of Category",
+  "ElementResolver": {
+    "ResolutionMap": {
+      "List": {
+        "Key": "DSCore.List",
+        "Value": "DSCoreNodes.dll"
+      },
+      "Category": {
+        "Key": "Revit.Elements.Category",
+        "Value": "RevitNodes.dll"
+      }
+    }
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "DSRevitNodesUI.ElementsOfCategory, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "Id": "1bce4840f2de4cf8804ced01d2fa66c4",
+      "Inputs": [
+        {
+          "Id": "efab2ac5ec3f4562a8c32640c7a7cfc3",
+          "Name": "Category",
+          "Description": "The Category",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "aea2d72f845c4568b2b8f278b8b7cce4",
+          "Name": "Elements",
+          "Description": "An element type.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Get all elements of the specified category from the model."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Symbol, DynamoCore",
+      "NodeType": "InputNode",
+      "Parameter": {
+        "Name": "category",
+        "TypeName": "Revit.Elements.Category",
+        "TypeRank": 0,
+        "DefaultValue": null,
+        "Description": ""
+      },
+      "Id": "5f6af2fca03843e88454fd9078e43996",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "82f98cb08aa845cd84867a49707b9dc8",
+          "Name": "",
+          "Description": "Symbol",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A function parameter, use with custom nodes.\r\n\r\nYou can specify the type and default value for parameter. E.g.,\r\n\r\ninput : var[]..[]\r\nvalue : bool = false"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Output, DynamoCore",
+      "NodeType": "OutputNode",
+      "ElementResolver": null,
+      "Symbol": "familyTypes",
+      "Id": "4e87d77874354c3e95cbd3c1bb3fbffc",
+      "Inputs": [
+        {
+          "Id": "f83ccf0077c7423c80c842f21035dd05",
+          "Name": "",
+          "Description": "",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [],
+      "Replication": "Disabled",
+      "Description": "A function output, use with custom nodes"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.List.UniqueItems@var[]..[]",
+      "Id": "9fa30e0d1fc94821b18f20946b2932db",
+      "Inputs": [
+        {
+          "Id": "3cbe107c14ad46a38ac6d3501236a7fa",
+          "Name": "list",
+          "Description": "List to filter duplicates out of.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "ac5cc3f865db4e4ea6fff3cafeffe98e",
+          "Name": "list",
+          "Description": "Filtered list.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Creates a new list containing all unique items in the given list.\n\nList.UniqueItems (list: var[]..[]): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "4796d57c-a1a0-4676-b524-57abb5fa73be",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "d5b18a0549ec4506a31abc4b20f9d824",
+      "Inputs": [
+        {
+          "Id": "c40f12427804437c9a6cd066a6fa4171",
+          "Name": "element",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "ad41c7d8f29e44bc8631807a9cae3cda",
+          "Name": "type",
+          "Description": "Output #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the family type of a given element (if applicable). Unlike the OOTB node, it also works for elements in linked models."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "aea2d72f845c4568b2b8f278b8b7cce4",
+      "End": "c40f12427804437c9a6cd066a6fa4171",
+      "Id": "bd427250ddee49dd9d0309e86fbce575"
+    },
+    {
+      "Start": "82f98cb08aa845cd84867a49707b9dc8",
+      "End": "efab2ac5ec3f4562a8c32640c7a7cfc3",
+      "Id": "a3e294a5a2f841bea222ca56d1772ee7"
+    },
+    {
+      "Start": "ac5cc3f865db4e4ea6fff3cafeffe98e",
+      "End": "f83ccf0077c7423c80c842f21035dd05",
+      "Id": "f0c15130b0714f0b963fc810945f4671"
+    },
+    {
+      "Start": "ad41c7d8f29e44bc8631807a9cae3cda",
+      "End": "3cbe107c14ad46a38ac6d3501236a7fa",
+      "Id": "0db83f90ef564ffa815161d26421c2f6"
+    }
+  ],
+  "Dependencies": [
+    "4796d57c-a1a0-4676-b524-57abb5fa73be"
+  ],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": false,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.0.1.5055",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "Id": "1bce4840f2de4cf8804ced01d2fa66c4",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "All Elements of Category",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 209.284711388458,
+        "Y": 54.0467735959437
+      },
+      {
+        "Id": "5f6af2fca03843e88454fd9078e43996",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Input",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": -77.7152886115422,
+        "Y": 54.0467735959437
+      },
+      {
+        "Id": "4e87d77874354c3e95cbd3c1bb3fbffc",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Output",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 1084.28471138846,
+        "Y": 54.0467735959437
+      },
+      {
+        "Id": "9fa30e0d1fc94821b18f20946b2932db",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "List.UniqueItems",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 831.284711388458,
+        "Y": 54.0467735959437
+      },
+      {
+        "Id": "d5b18a0549ec4506a31abc4b20f9d824",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Element.ElementType+",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 491.535101404055,
+        "Y": 57.110726729069
+      }
+    ],
+    "Annotations": [],
+    "X": 128.0,
+    "Y": 362.884848358375,
+    "Zoom": 1.07011686143573
+  }
+}
